@@ -3,6 +3,8 @@ Create a memory match game!
 """
 import random
 import time
+x = random.randint(300, 3030)
+time.sleep(1)
 import tkinter as tk
 
 # TODO: First, run this code. You should see a grid with 52 buttons.
