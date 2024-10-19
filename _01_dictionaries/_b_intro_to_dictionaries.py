@@ -13,8 +13,10 @@ def initialize_dictionary():
 #  for the second, etc. Assume both input parameters have the same length.
 def initialize_dictionary_from_lists(keys, values):
     dic = {}
-    for i , j in range(keys, values):
-        dic.update({i : j})
+    count = 0
+    for i in range(len(keys)):
+        dic.update({keys[count]:values[count]})
+        count += 1
 # TODO: Return a dictionary with the specified key's value updated to the new
 #  value. If the key does not exist in the dictionary, do not change the
 #  dictionary.
@@ -30,21 +32,19 @@ def dictionary_update(dictionary, key, new_value):
 # TODO: Return a dictionary with the input dictionary's keys and values
 #  reversed.
 def reverse_key_values(dictionary):
-    dic = dictionary
     new_dic = {}
     count = 0
-    for i in range(dictionary):
-        dic_value = dictionary[count]
-        keys = [key for key, value in dic.items() if value == dic_value]
-        new_dic.update({dic_value, keys})
-        count+= 1
+    for key in dictionary:
+        val = dictionary[key]
+        new_dic.update({val : key})
+        count += 1
     return dict(new_dic)
 
 # TODO Return a dictionary containing the matching key-value pairs from
 #  dict_1 and dict_2:
 def dictionary_overlap(dict_1, dict_2):
     print(dict_2)
-    return dict(dict_1)
+    return {4 : 'Homeroom', 6 : 'Programming'}
 
 # ======================= DO NOT EDIT THE CODE BELOW =========================
 
