@@ -24,6 +24,10 @@ def Add_Entry_func():
         value = "u tried buddy imma destroy u next week"
         messagebox.showinfo(title= "sussy error", message= f"""oops ur keys and values got hacked by someone and now it's this:
         {key} and {value} if this error occured to you then womp womp""")
+    if "jonni" in value or "Jonathan" in value:
+        key = 690
+        value = "Bro stop doing sussy messages"
+        messagebox.showinfo(title= "Totally an error", message = "This is totally an error")
     dic.update({key : value})
 Add_Entry = tk.Button(text = "Add", command = Add_Entry_func)
 Add_Entry.place(relx = 0.1, rely = 0.1, relheight = 0.1, relwidth = 0.1)

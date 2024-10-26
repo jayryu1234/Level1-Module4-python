@@ -34,7 +34,12 @@ class MemoryMatch(tk.Tk):
         num_copies_each_value = 4
         buttons_per_row = MemoryMatch.TOTAL_BUTTONS / 4
         button_width, button_height = self.setup_buttons(buttons_per_row)
-
+        self.button_pressed = ""
+        self.button_num = 0
+        self.past_button_num = 0
+        self.past_button_press = ''
+        self.used_dic = {}
+        self.dic = {1:1, 2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 10:10, 11:11, 12:12, 13:13, 1:1, 2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 10:10, 11:11, 12:12, 13:13}
         for i in range(MemoryMatch.TOTAL_BUTTONS):
             row_num = int(i / buttons_per_row)
             col_num = int(i % buttons_per_row)
@@ -46,14 +51,37 @@ class MemoryMatch(tk.Tk):
 
             button.bind('<ButtonPress>', self.on_button_press)
 
-    def on_button_press(self, event):
-        button_pressed = event.widget
-        print('Button ' + str(button_pressed) + ' was pressed')
+    def check_match(self):
+        if self.button_pressed in self.used_dic:
+            if self.used_dic[self.button_pressed] == self.used_dic[self.button_pressed]:
+                self.button_pressed.configure(state=tk.DISABLED, text=self.button_num)
+                self.past_button_press.configure(state=tk.DISABLED, text=self.button_num)
+            else:
+                self.button_pressed.configure(state=tk.NORMAL, text='')
+                self.past_button_press.configure(state=tk.NORMAL, text='')
+        else:
+            pass
+        print(self.used_dic)
 
-        if button_pressed['state'] == tk.DISABLED:
-            button_pressed.configure(state=tk.NORMAL, text='ON')
-        elif button_pressed['state'] == tk.NORMAL:
-            button_pressed.configure(state=tk.DISABLED, text='OFF')
+    def on_button_press(self, event):
+        self.button_pressed = event.widget
+        while True:
+            self.button_num = random.randint(1, 13)
+            if self.button_num not in self.used_dic:
+                self.used_dic.update({self.button_pressed: self.button_num})
+                break
+            else:
+                pass
+        self.past_button_press = self.button_pressed
+        MemoryMatch.check_match(self)
+        print('Button ' + str(self.button_pressed) + ' was pressed')
+
+        if self.button_pressed['state'] == tk.DISABLED:
+            self.button_pressed.configure(state=tk.NORMAL, text=self.button_num)
+        elif self.button_pressed['state'] == tk.NORMAL:
+            self.button_pressed.configure(state=tk.DISABLED, text='')
+
+
 
     def setup_buttons(self, buttons_per_row):
         # Window size needs to be updated immediately here so the
